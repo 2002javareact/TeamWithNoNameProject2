@@ -44,4 +44,24 @@ public class UsersController {
 		}
 		return new ResponseEntity<Users>(us.saveNewUser(u), HttpStatus.CREATED);
 	}
+	
+	@GetMapping("{id}")// how to do pathvariables in spring
+	public ResponseEntity<Users> getUserById(@PathVariable int id){
+		if(id == 0) {
+			return new ResponseEntity("Id must not be 0", HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<Users>(us.getUserByID(id), HttpStatus.OK);
+	}
+
+	@PatchMapping
+	public ResponseEntity<Users> updateUser(@RequestBody Users u){// will try and turn the body into the object type on its right
+		if(u.getUserId() == 0) {
+			return new ResponseEntity("userId must not be 0", HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<Users>(us.updateUser(u), HttpStatus.CREATED);
+	}
+	
+	
+	
+	
 }
