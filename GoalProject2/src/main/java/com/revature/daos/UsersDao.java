@@ -6,8 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.revature.models.Users;
 
 @Repository//This is all we need
-public interface UsersDao extends JpaRepository<Users,Integer>
-{
+public interface UsersDao extends JpaRepository<Users,Integer>{
 	
 	//I want to add a method for logging in
 	//because of how the method is named, it will do what we want

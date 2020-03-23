@@ -32,20 +32,6 @@ public class UsersController {
 		this.us = us;
 	}
 
-	@GetMapping//this is going to match GET on path /users
-	//This methods purpose, is take a request and build a response from that request
-	public ResponseEntity<List<Users>> getAllUsers(){
-		
-		return new ResponseEntity(us.getAllUsers(), HttpStatus.OK);
-	}
-	
-	@PostMapping// this matches post key word
-	public ResponseEntity<Users> saveNewUser(@RequestBody Users u){// will try and turn the body into the object type on its right
-		if(u.getUserId() != 0) {
-			return new ResponseEntity("userId must be 0", HttpStatus.BAD_REQUEST);
-		}
-		return new ResponseEntity<Users>(us.saveNewUser(u), HttpStatus.CREATED);
-	}
 	
 	@GetMapping("{id}")// how to do pathvariables in spring
 	public ResponseEntity<Users> getUserById(@PathVariable int id){
@@ -61,11 +47,6 @@ public class UsersController {
 			return new ResponseEntity("userId must not be 0", HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<Users>(us.updateUser(u), HttpStatus.CREATED);
-	}
-	
-	@PostMapping("login")
-	public ResponseEntity<Users> login(@RequestBody Credentials cred){
-		return new ResponseEntity(us.loginUser(cred.getUsername(), cred.getPassword()), HttpStatus.OK);
 	}
 	
 }
