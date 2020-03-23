@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.revature</groupId>
-	<artifactId>MoviesApi</artifactId>
+	<artifactId>GoalProject2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>MoviesApi</name>
+	<name>GoalProject2</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

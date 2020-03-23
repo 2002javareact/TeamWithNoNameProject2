@@ -1,0 +1,14 @@
+package com.revature.services;
+
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+
+import com.revature.models.Users;
+
+public interface UsersService {
+	public Users loginUser(String username, String password);
+	
+	public Users saveNewUser(Users u);
+
+}
