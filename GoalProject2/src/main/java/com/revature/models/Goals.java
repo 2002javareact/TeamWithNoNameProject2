@@ -13,8 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 //Think of this as a table in our Database
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})// put this on all of your entities
 public class Goals {
 
 	@Id
@@ -23,9 +26,8 @@ public class Goals {
 	private int goalId;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-	@JoinColumn(name = "goals", referencedColumnName = "user_id")
-	@Column(name = "user_id")
-	private int userId;
+	@JoinColumn(referencedColumnName = "user_id")
+	private Users user;
 
 	private String name;
 
@@ -37,7 +39,7 @@ public class Goals {
 
 	//One to many
 	//This needs needs to be another table one to many
-	private List<String> milestones;
+	//private List<String> milestones;
 
 	@Column(name = "start_date")
 	private Date startDate;
@@ -66,13 +68,13 @@ public class Goals {
 	}
 
 
-	public int getUserId() {
-		return userId;
+	public Users getUserId() {
+		return user;
 	}
 
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUserId(Users user) {
+		this.user = user;
 	}
 
 
@@ -106,16 +108,6 @@ public class Goals {
 	}
 
 
-	public List<String> getMilestones() {
-		return milestones;
-	}
-
-
-	public void setMilestones(List<String> milestones) {
-		this.milestones = milestones;
-	}
-
-
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -146,15 +138,14 @@ public class Goals {
 	}
 
 
-	public Goals(int goalId, int userId, String name, String description, int goalLength, List<String> milestones,
-			Date startDate, Date completeDate, boolean successful) {
+	public Goals(int goalId, Users user, String name, String description, int goalLength, Date startDate,
+			Date completeDate, boolean successful) {
 		super();
 		this.goalId = goalId;
-		this.userId = userId;
+		this.user = user;
 		this.name = name;
 		this.description = description;
 		this.goalLength = goalLength;
-		this.milestones = milestones;
 		this.startDate = startDate;
 		this.completeDate = completeDate;
 		this.successful = successful;
@@ -163,9 +154,9 @@ public class Goals {
 
 	@Override
 	public String toString() {
-		return "Goals [goalId=" + goalId + ", userId=" + userId + ", name=" + name + ", description=" + description
-				+ ", goalLength=" + goalLength + ", milestones=" + milestones + ", startDate=" + startDate
-				+ ", completeDate=" + completeDate + ", successful=" + successful + "]";
+		return "Goals [goalId=" + goalId + ", userId=" + user + ", name=" + name + ", description=" + description
+				+ ", goalLength=" + goalLength + ", startDate=" + startDate + ", completeDate=" + completeDate
+				+ ", successful=" + successful + "]";
 	}
 
 
@@ -177,11 +168,10 @@ public class Goals {
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + goalId;
 		result = prime * result + goalLength;
-		result = prime * result + ((milestones == null) ? 0 : milestones.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
 		result = prime * result + (successful ? 1231 : 1237);
-		result = prime * result + userId;
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -209,11 +199,6 @@ public class Goals {
 			return false;
 		if (goalLength != other.goalLength)
 			return false;
-		if (milestones == null) {
-			if (other.milestones != null)
-				return false;
-		} else if (!milestones.equals(other.milestones))
-			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -226,10 +211,13 @@ public class Goals {
 			return false;
 		if (successful != other.successful)
 			return false;
-		if (userId != other.userId)
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
 			return false;
 		return true;
-	}	
+	}
 	
 }
 
