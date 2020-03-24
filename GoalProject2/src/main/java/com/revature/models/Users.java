@@ -2,12 +2,14 @@ package com.revature.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -19,8 +21,8 @@ public class Users  {
 
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userId;
 
 	private String username;
@@ -36,12 +38,13 @@ public class Users  {
 	private String email;
 	
 	// one to many
-	@OneToMany(mappedBy = "goals")
+	@OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
 	private List<Goals> userGoals;
 	
 	//one to one
-	@OneToOne(fetch = FetchType.EAGER)
-	private int roleId;
+	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@JoinColumn(referencedColumnName = "role_id")
+	private Role role;
 
 	public Users() {
 		super();
@@ -104,16 +107,16 @@ public class Users  {
 		this.userGoals = userGoals;
 	}
 
-	public int getRoleId() {
-		return roleId;
+	public Role getRole() {
+		return role;
 	}
 
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	public Users(int userId, String username, String password, String firstName, String lastName, String email,
-			List<Goals> userGoals, int roleId) {
+			List<Goals> userGoals, Role role) {
 		super();
 		this.userId = userId;
 		this.username = username;
@@ -122,14 +125,14 @@ public class Users  {
 		this.lastName = lastName;
 		this.email = email;
 		this.userGoals = userGoals;
-		this.roleId = roleId;
+		this.role = role;
 	}
 
 	@Override
 	public String toString() {
 		return "Users [userId=" + userId + ", username=" + username + ", password=" + password + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", email=" + email + ", userGoals=" + userGoals + ", roleId="
-				+ roleId + "]";
+				+ firstName + ", lastName=" + lastName + ", email=" + email + ", userGoals=" + userGoals + ", role="
+				+ role + "]";
 	}
 
 	@Override
@@ -140,7 +143,7 @@ public class Users  {
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + roleId;
+		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		result = prime * result + ((userGoals == null) ? 0 : userGoals.hashCode());
 		result = prime * result + userId;
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
@@ -176,7 +179,10 @@ public class Users  {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (roleId != other.roleId)
+		if (role == null) {
+			if (other.role != null)
+				return false;
+		} else if (!role.equals(other.role))
 			return false;
 		if (userGoals == null) {
 			if (other.userGoals != null)
@@ -192,4 +198,5 @@ public class Users  {
 			return false;
 		return true;
 	}
+
 }

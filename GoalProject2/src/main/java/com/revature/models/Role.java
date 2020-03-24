@@ -1,20 +1,30 @@
 package com.revature.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})// put this on all of your entities
 public class Role {
 
 	@Id
 	@Column(name="role_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@OneToOne
 	private int roleId;
 	
 	private String roleName;
+
+	@OneToOne(mappedBy = "role")
+	private Users user;
 
 	public Role() {
 		super();
