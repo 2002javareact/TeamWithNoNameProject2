@@ -34,7 +34,12 @@ public class UsersController {
 	
 	@PostMapping("login")
 	public ResponseEntity<Users> login(@RequestBody Credentials cred){
-		return new ResponseEntity(us.loginUser(cred.getUsername(), cred.getPassword()), HttpStatus.OK);
+		try {
+			Users user = us.loginUser(cred.getUsername(), cred.getPassword());
+			return new ResponseEntity(user, HttpStatus.OK);
+		}catch(NullPointerException e) {
+			return new ResponseEntity("Incorrect username and password",HttpStatus.FORBIDDEN);
+		}
 	}
 	
 	@PostMapping// this matches post key word

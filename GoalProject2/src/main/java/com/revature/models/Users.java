@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -41,8 +42,8 @@ public class Users  {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
 	private List<Goals> userGoals;
 	
-	//one to one
-	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	//many to one
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinColumn(referencedColumnName = "role_id")
 	private Role role;
 
