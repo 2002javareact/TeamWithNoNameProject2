@@ -48,7 +48,6 @@ public class UsersController {
 		if(u.getUserId() != 0) {
 			return new ResponseEntity("userId must be 0", HttpStatus.BAD_REQUEST);
 		}
-		u.setRole(new Role(1,"user"));
 		return new ResponseEntity<Users>(us.saveNewUser(u), HttpStatus.CREATED);
 	}
 	
