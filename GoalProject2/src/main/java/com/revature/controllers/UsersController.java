@@ -66,7 +66,13 @@ public class UsersController {
 		return new ResponseEntity<Users>(us.updateUser(u), HttpStatus.CREATED);
 	}
 	
-	
+
+	@GetMapping//this is going to match GET on path /users
+	//This methods purpose, is take a request and build a response from that request
+	public ResponseEntity<List<Users>> getAllUsers(){
+		
+		return new ResponseEntity(us.getAllUsers(), HttpStatus.OK);
+	}
 	
 	
 }
