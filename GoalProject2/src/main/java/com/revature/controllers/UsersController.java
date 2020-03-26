@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.dtos.Credentials;
+import com.revature.models.Role;
 import com.revature.models.Users;
 import com.revature.services.UsersService;
 
@@ -47,6 +48,7 @@ public class UsersController {
 		if(u.getUserId() != 0) {
 			return new ResponseEntity("userId must be 0", HttpStatus.BAD_REQUEST);
 		}
+		u.setRole(new Role(1,"user"));
 		return new ResponseEntity<Users>(us.saveNewUser(u), HttpStatus.CREATED);
 	}
 	

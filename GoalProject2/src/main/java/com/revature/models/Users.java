@@ -44,7 +44,6 @@ public class Users  {
 	
 	//many to one
 	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-	@JoinColumn(referencedColumnName = "role_id")
 	private Role role;
 
 	public Users() {
