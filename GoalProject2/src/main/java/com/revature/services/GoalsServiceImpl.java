@@ -58,6 +58,15 @@ public class GoalsServiceImpl implements GoalsService {
 		if(g.getGoalLength() != 0) {
 			oldGoal.setGoalLength(g.getGoalLength());
 		}
+		if(g.getStartDate() != null) {
+			oldGoal.setCompleteDate(g.getStartDate());
+		}
+		if(g.getCompleteDate() != null) {
+			oldGoal.setCompleteDate(g.getCompleteDate());
+		}
+		if(g.isSuccessful()) {
+			oldGoal.setSuccessful(true);
+		} else oldGoal.setSuccessful(false);
 		return oldGoal;
 	}
 
