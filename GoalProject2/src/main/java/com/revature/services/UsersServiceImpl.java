@@ -62,5 +62,9 @@ public class UsersServiceImpl implements UsersService{
 		return oldUser;
 	}
 
+	@Override
+	public List<Users> getAllUsers() {
+		return ud.findAll();
+	}
 	
 }
