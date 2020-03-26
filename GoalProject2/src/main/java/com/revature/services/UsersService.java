@@ -12,5 +12,5 @@ public interface UsersService {
 	
 	public Users getUserByID(int id);
 	public Users updateUser(Users u);
-
+	public List<Users> getAllUsers();
 }
