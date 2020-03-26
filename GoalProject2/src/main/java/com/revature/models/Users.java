@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})// put this on all of your entities
@@ -38,12 +39,8 @@ public class Users  {
 	
 	private String email;
 	
-	// one to many
-	@OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
-	private List<Goals> userGoals;
-	
 	//many to one
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Role role;
 
 	public Users() {
@@ -99,14 +96,6 @@ public class Users  {
 		this.email = email;
 	}
 
-	public List<Goals> getUserGoals() {
-		return userGoals;
-	}
-
-	public void setUserGoals(List<Goals> userGoals) {
-		this.userGoals = userGoals;
-	}
-
 	public Role getRole() {
 		return role;
 	}
@@ -116,7 +105,7 @@ public class Users  {
 	}
 
 	public Users(int userId, String username, String password, String firstName, String lastName, String email,
-			List<Goals> userGoals, Role role) {
+			Role role) {
 		super();
 		this.userId = userId;
 		this.username = username;
@@ -124,15 +113,13 @@ public class Users  {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.userGoals = userGoals;
 		this.role = role;
 	}
 
 	@Override
 	public String toString() {
 		return "Users [userId=" + userId + ", username=" + username + ", password=" + password + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", email=" + email + ", userGoals=" + userGoals + ", role="
-				+ role + "]";
+				+ firstName + ", lastName=" + lastName + ", email=" + email + ", role=" + role + "]";
 	}
 
 	@Override
@@ -144,7 +131,6 @@ public class Users  {
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
-		result = prime * result + ((userGoals == null) ? 0 : userGoals.hashCode());
 		result = prime * result + userId;
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
@@ -184,11 +170,6 @@ public class Users  {
 				return false;
 		} else if (!role.equals(other.role))
 			return false;
-		if (userGoals == null) {
-			if (other.userGoals != null)
-				return false;
-		} else if (!userGoals.equals(other.userGoals))
-			return false;
 		if (userId != other.userId)
 			return false;
 		if (username == null) {
@@ -199,4 +180,5 @@ public class Users  {
 		return true;
 	}
 
+	
 }

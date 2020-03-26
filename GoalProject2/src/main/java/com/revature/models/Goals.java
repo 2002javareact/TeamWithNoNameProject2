@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 //Think of this as a table in our Database
@@ -25,8 +26,7 @@ public class Goals {
 	@Column(name = "goal_id")
 	private int goalId;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-	@JoinColumn(referencedColumnName = "user_id")
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Users user;
 
 	private String name;
