@@ -68,4 +68,12 @@ public class UsersServiceImpl implements UsersService{
 		return ud.findAll(Sort.by(Sort.Direction.ASC, "userId")); //Sorted By userId asc
 	}
 	
+	@Override
+	public Users deleteUserByID(int id) {
+		// TODO Auto-generated method stub
+		ud.deleteById(id);
+		return new Users();
+	}
+	
+	
 }

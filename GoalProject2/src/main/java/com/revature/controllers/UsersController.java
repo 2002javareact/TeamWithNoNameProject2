@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -73,6 +74,15 @@ public class UsersController {
 	public ResponseEntity<List<Users>> getAllUsers(){
 		
 		return new ResponseEntity(us.getAllUsers(), HttpStatus.OK);
+	}
+	
+	
+	@DeleteMapping("{id}")// how to do pathvariables in spring
+	public ResponseEntity<Users> deleteUserById(@PathVariable int id){
+		if(id == 0) {
+			return new ResponseEntity("Id must not be 0", HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<Users>(us.deleteUserByID(id), HttpStatus.OK);
 	}
 	
 	
