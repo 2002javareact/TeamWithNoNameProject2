@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.rmi.dgc.DGC;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -26,10 +27,6 @@ public class GoalsServiceImpl implements GoalsService {
 	
 	@Override
 	public Goals saveNewGoal(Goals g) {
-		
-		
-		
-		
 		return gd.save(g);
 	}
 	
@@ -68,6 +65,14 @@ public class GoalsServiceImpl implements GoalsService {
 			oldGoal.setSuccessful(true);
 		} else oldGoal.setSuccessful(false);
 		return oldGoal;
+	}
+
+
+
+	@Override
+	public List<Goals> getAllGoalByUserId(int id) {
+		// TODO Auto-generated method stub
+		return gd.findByUserId(id);
 	}
 
 

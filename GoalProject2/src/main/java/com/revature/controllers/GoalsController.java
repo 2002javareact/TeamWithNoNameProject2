@@ -59,7 +59,13 @@ package com.revature.controllers;
 			return new ResponseEntity<Goals>(gs.updateGoal(g), HttpStatus.CREATED);
 		}
 		
-		
+		@GetMapping("user/{id}")// how to do pathvariables in spring
+		public ResponseEntity<List<Goals>> getAllGoalByUserId(@PathVariable int id){
+			if(id == 0) {
+				return new ResponseEntity("Id must not be 0", HttpStatus.BAD_REQUEST);
+			}
+			return new ResponseEntity(gs.getAllGoalByUserId(id), HttpStatus.OK);
+		}
 		
 		
 	}
