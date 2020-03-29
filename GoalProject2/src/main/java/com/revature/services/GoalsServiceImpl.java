@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import java.rmi.dgc.DGC;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -46,10 +47,10 @@ public class GoalsServiceImpl implements GoalsService {
 		// make sure to do it in one transaction using the @transactional annotation
 		Goals oldGoal = gd.getOne(g.getGoalId());
 		
-		if(g.getName() != null) {
+		if(!g.getName().equals("")) {
 			oldGoal.setName(g.getName());
 		}
-		if(g.getDescription() != null) {
+		if(!g.getDescription().equals("")) {
 			oldGoal.setDescription(g.getDescription());
 		}
 		if(g.getGoalLength() != 0) {
@@ -61,7 +62,8 @@ public class GoalsServiceImpl implements GoalsService {
 		if(g.getCompleteDate() != null) {
 			oldGoal.setCompleteDate(g.getCompleteDate());
 		}
-		if(g.isSuccessful()) {
+		if(g.getCompleteDate().after(g.getStartDate())) {
+			
 			oldGoal.setSuccessful(true);
 		} else oldGoal.setSuccessful(false);
 		return oldGoal;
