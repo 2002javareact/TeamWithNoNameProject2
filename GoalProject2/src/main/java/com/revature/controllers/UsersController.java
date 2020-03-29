@@ -85,5 +85,14 @@ public class UsersController {
 		return new ResponseEntity<Users>(us.deleteUserByID(id), HttpStatus.OK);
 	}
 	
+
+	@GetMapping("total")// how to do pathvariables in spring
+	public ResponseEntity<Long> getTotalUsers(){
+				
+		return new ResponseEntity<Long>(us.getTotalUsers(), HttpStatus.OK);
+			
+		
+	}
+	
 	
 }

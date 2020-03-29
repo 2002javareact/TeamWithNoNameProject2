@@ -14,4 +14,6 @@ public interface UsersService {
 	public Users updateUser(Users u);
 	public List<Users> getAllUsers();
 	public Users deleteUserByID(int id);
+	
+	public long getTotalUsers();
 }

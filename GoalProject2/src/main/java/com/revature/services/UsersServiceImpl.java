@@ -75,5 +75,11 @@ public class UsersServiceImpl implements UsersService{
 		return new Users();
 	}
 	
+	@Override
+	public long getTotalUsers()
+	{
+		return ud.count();		
+	}
+	
 	
 }
