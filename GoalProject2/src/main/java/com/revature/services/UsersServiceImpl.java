@@ -48,16 +48,19 @@ public class UsersServiceImpl implements UsersService{
 		//we find the object to update and thern set whatever fields to their new values
 		// make sure to do it in one transaction using the @transactional annotation
 		Users oldUser = ud.getOne(u.getUserId());
-		if(u.getFirstName() != null) {
+		if(!u.getFirstName().equals("")) {
 			oldUser.setFirstName(u.getFirstName());
 		}
-		if(u.getLastName() != null) {
+		if(!u.getEmail().equals("")) {
+			oldUser.setEmail(u.getEmail());
+		}
+		if(!u.getLastName().equals("")) {
 			oldUser.setLastName(u.getLastName());
 		}
-		if(u.getUsername() != null) {
+		if(!u.getUsername().equals("")) {
 			oldUser.setUsername(u.getUsername());
 		}
-		if(u.getPassword() != null) {
+		if(!u.getPassword().equals("")) {
 			oldUser.setPassword(u.getPassword());
 		}
 		return oldUser;
