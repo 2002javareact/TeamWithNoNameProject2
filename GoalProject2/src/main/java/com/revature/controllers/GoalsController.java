@@ -59,7 +59,14 @@ package com.revature.controllers;
 			return new ResponseEntity<Goals>(gs.updateGoal(g), HttpStatus.CREATED);
 		}
 		
-		
+
+		@GetMapping("total")// how to do pathvariables in spring
+		public ResponseEntity<Long> getTotalGoals(){
+					
+			return new ResponseEntity<Long>(gs.getTotalGoals(), HttpStatus.OK);
+				
+			
+		}
 		
 		
 	}

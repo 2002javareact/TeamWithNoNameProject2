@@ -69,6 +69,13 @@ public class GoalsServiceImpl implements GoalsService {
 		} else oldGoal.setSuccessful(false);
 		return oldGoal;
 	}
+	
+	@Override
+	public long getTotalGoals()
+	{
+		return gd.count();		
+	}
+	
 
 
 }
