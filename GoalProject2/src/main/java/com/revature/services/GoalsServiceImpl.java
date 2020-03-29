@@ -76,4 +76,10 @@ public class GoalsServiceImpl implements GoalsService {
 	}
 
 
+
+	@Override
+	public long getTotalGoals()
+	{
+		return gd.count();		
+	}
 }

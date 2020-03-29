@@ -14,5 +14,6 @@ public interface GoalsService {
 	public Goals getGoalByID(int id);
 	public Goals updateGoal(Goals g);
 	public List<Goals> getAllGoalByUserId(int id);
+	public long getTotalGoals();
 
 }
